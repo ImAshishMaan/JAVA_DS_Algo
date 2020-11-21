@@ -12,9 +12,6 @@ class Palindrome_premutation{
         String s = sc.nextLine();
 
         // Method 1
-        if(s==null){
-            System.out.println("false");
-        }
         BitSet bs = new BitSet(256);
         for(char c: s.toCharArray())
             bs.flip(c);

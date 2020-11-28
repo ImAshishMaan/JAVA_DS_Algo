@@ -30,28 +30,42 @@
 //        For the first test case, for x=10000, 10000^1=10000=n
 
 package Array_Challenges;
-
 import java.util.*;
-class KTH_ROOT{
-    public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
-        int t = sc.nextInt();
-        long num = 0;
-        while(t>0){
-            long n = sc.nextLong();
-            long k = sc.nextLong();
-            for(int i=0; i<=n ; i++){
-                if(Math.pow(i,k) < n){
-                    num = i;
-                    continue;
-                }else if(Math.pow(i,k) == n){
-                    num = i;
+class KTH_ROOT {
+
+    public static void main(String[] args) {
+        Scanner scn = new Scanner(System.in);
+        int t = scn.nextInt();
+        while(t-- > 0) {
+            long n = scn.nextLong(), k = scn.nextLong();
+
+            if(k==1){
+                System.out.println(n);;
+                continue;
+            }
+            long lo = 1, hi = 1000000, ans = -1;
+            while(lo<=hi) {
+                long mid = (lo+hi)/2;
+                long var=1;
+                for(int i=1;i<=k;i++)
+                {
+                    var*=mid;
+                    if(var>n)
+                    {
+                        break;
+                    }
+                }
+                if(var == n) {
+                    ans = mid;
                     break;
-                }else if(Math.pow(i,k) > n){
-                    break;
+                } else if (var < n) {
+                    ans = mid;
+                    lo=mid+1;
+                } else {
+                    hi=mid-1;
                 }
             }
-            System.out.println(num);
+            System.out.println(ans);;
         }
     }
 }

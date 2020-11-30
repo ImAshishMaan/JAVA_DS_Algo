@@ -1,4 +1,4 @@
-package Recursion_Theory;
+package Recursion_Challenges;
 
 import java.util.*;
 

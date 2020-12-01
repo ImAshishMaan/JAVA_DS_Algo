@@ -4,7 +4,16 @@ import java.util.*;
 
 class SubSequences{
     public static void main(String[] args){
-        System.out.println(getSS("abc"));
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        for(int i= 0 ; i<n; i++){
+            String str= sc.next();
+            ArrayList<String> arrstr = getSS(str);
+            Collections.sort(arrstr);
+            for(String ss : arrstr){
+                System.out.println(ss);
+            }
+        }
     }
     public static ArrayList<String> getSS(String str){
         if(str.length() == 0){

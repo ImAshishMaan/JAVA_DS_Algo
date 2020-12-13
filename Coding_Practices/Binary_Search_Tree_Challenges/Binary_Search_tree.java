@@ -83,15 +83,42 @@ class Binary_Search_Tree{
         return min(node.left);
     }
 
+    public void add(int item){
+        add(this.root, item);
+    }
+    public void add(Node node, int item){
+        if(item < node.data){
+            if(node.left == null){
+                Node nn = new Node();
+                nn.data = item;
+                node.left = nn;
+            }else{
+                add(node.left, item);
+            }
+        }else{
+            if(node.right == null){
+                Node nn = new Node();
+                nn.data = item;
+                node.right = nn;
+            }else{
+                add(node.right, item);
+            }
+        }
+    }
+
     public static void main(String[] args){
 
         int[] arr = {10,20,30,40,50,60,70};
         Binary_Search_Tree tree = new Binary_Search_Tree(arr);
 
         tree.display();
-        System.out.println(tree.find(70));
-        System.out.println(tree.max());
-        System.out.println(tree.min());
+        //System.out.println(tree.find(70));
+        //System.out.println(tree.max());
+        //System.out.println(tree.min());
+        System.out.println("---------------------------");
+        tree.add(100);
+        tree.display();
+
     }
 
 }

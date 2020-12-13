@@ -1,5 +1,4 @@
 package Stack_and_Queues;
-
 import java.util.*;
 
 class window_size_k_maxelement{

@@ -63,7 +63,26 @@ class Binary_Search_Tree{
             return true;
         }
     }
-    
+    public int max(){
+        return max(this.root);
+    }
+    public int max(Node node){
+        if(node.right == null){
+            return node.data;
+        }
+        return max(node.right);
+    }
+
+    public int min(){
+        return min(this.root);
+    }
+    public int min(Node node){
+        if(node.left == null){
+            return node.data;
+        }
+        return min(node.left);
+    }
+
     public static void main(String[] args){
 
         int[] arr = {10,20,30,40,50,60,70};
@@ -71,7 +90,8 @@ class Binary_Search_Tree{
 
         tree.display();
         System.out.println(tree.find(70));
-
+        System.out.println(tree.max());
+        System.out.println(tree.min());
     }
 
 }

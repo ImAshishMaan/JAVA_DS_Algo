@@ -48,12 +48,29 @@ class Binary_Search_Tree{
         display(node.left);
         display(node.right);
     }
+    public boolean find(int item){
+        return find(this.root, item);
+    }
+    public boolean find(Node node, int item){
+        if(node == null){
+            return false;
+        }
+        if(item > node.data){
+            return find(node.right, item);
+        }else if(item < node.data){
+            return find(node.left, item);
+        }else{
+            return true;
+        }
+    }
+    
     public static void main(String[] args){
 
         int[] arr = {10,20,30,40,50,60,70};
         Binary_Search_Tree tree = new Binary_Search_Tree(arr);
 
         tree.display();
+        System.out.println(tree.find(70));
 
     }
 

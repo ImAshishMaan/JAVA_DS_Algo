@@ -20,7 +20,6 @@ class generic_tree{
     private Node takeinput(Scanner s, Node parent, int ithchild){
         if(parent==null){
             System.out.println("Enter root node");
-
         }else{
             System.out.println("Enter the data for the "+ithchild+"th child of "+parent.data);
         }

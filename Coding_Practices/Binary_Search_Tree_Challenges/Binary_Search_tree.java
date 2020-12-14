@@ -105,6 +105,49 @@ class Binary_Search_Tree{
             }
         }
     }
+    public void remove(int item){
+        remove(this.root, null, false, item);
+    }
+    public void remove(Node node, Node parent, boolean ilc , int item){
+        if(node == null){
+            return;
+        }
+        if(item > node.data){
+            remove(node.right, node, false, item);
+        }
+        else if(item < node.data){
+            remove(node.left, node, true, item);
+        }
+        else{
+            if(node.left == null && node.right == null){
+                if(ilc){
+                    parent.left = null;
+                }else{
+                    parent.right = null;
+                }
+            }
+            else if(node.left == null && node.right != null){
+                if(ilc){
+                    parent.left = node.right;
+                }else{
+                    parent.right = node.right;
+                }
+            }
+            else if(node.left != null && node.right == null){
+                if(ilc){
+                    parent.left = node.left;
+                }else{
+                    parent.right = node.left;
+                }
+            }
+            else if(node.left != null && node.right != null){
+                int max = max(node.left);
+                node.data = max;
+
+                remove(node.left, node, true, max);
+            }
+        }
+    }
 
     public static void main(String[] args){
 
@@ -117,6 +160,12 @@ class Binary_Search_Tree{
         //System.out.println(tree.min());
         System.out.println("---------------------------");
         tree.add(100);
+        tree.display();
+        System.out.println("---------------------------");
+        tree.remove(100);
+        tree.display();
+        System.out.println("---------------------------");
+        tree.remove(40);
         tree.display();
 
     }

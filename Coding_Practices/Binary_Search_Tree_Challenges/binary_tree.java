@@ -117,10 +117,23 @@ public class binary_tree{
         System.out.print(node.data + ", ");
 
     }
+    public void levelorder(){
+        levelorder(this.root);
+    }
     private void levelorder(Node node){
-
-
+        LinkedList<Node> queue = new LinkedList<>();
+        queue.add(node);
+        while(!queue.isEmpty()){
+            Node rv = queue.removeFirst();
+            System.out.print(rv.data+", ");
+            if(rv.left != null){
+                queue.addLast(rv.left);
+            }
+            if(rv.right != null){
+                queue.addLast(rv.right);
+            }
         }
+    }
     public static void main(String[] args){
         // 50 true 25 true 38 false false true 48 true 18 false false false true 45 true 85 false false true 60 false false
         binary_tree tree = new binary_tree();
@@ -128,8 +141,9 @@ public class binary_tree{
         //System.out.println("Height of the tree is "+tree.height());
         //tree.preorder();
         //System.out.println();
-        //tree.inorder();
+        tree.inorder();
         //System.out.println();
         //tree.postorder();
+        //tree.levelorder();
     }
 }

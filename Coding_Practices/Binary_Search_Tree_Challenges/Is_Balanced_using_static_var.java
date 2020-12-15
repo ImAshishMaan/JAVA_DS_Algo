@@ -56,8 +56,8 @@ class Is_Balanced_using_static_var{
             if(node == null){
                 return 1;
             }
-            Integer lh = isBalanced(node.left);
-            Integer rh = isBalanced(node.right);
+            int lh = isBalanced(node.left);
+            int rh = isBalanced(node.right);
 
 
             if(Math.abs(lh-rh) > 1){

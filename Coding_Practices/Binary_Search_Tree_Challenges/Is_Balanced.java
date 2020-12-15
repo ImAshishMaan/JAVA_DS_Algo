@@ -1,10 +1,10 @@
 package Binary_Search_Tree_Challenges;
 
 import java.util.*;
-class Is_Balaced {
+class Is_Balanced {
     static Scanner scn = new Scanner(System.in);
     public static void main(String[] args) {
-        Is_Balaced m = new Is_Balaced();
+        Is_Balanced m = new Is_Balanced();
         BinaryTree bt = m.new BinaryTree();
         System.out.println(bt.isBalanced());
     }

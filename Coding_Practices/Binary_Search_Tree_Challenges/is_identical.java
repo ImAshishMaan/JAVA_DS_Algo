@@ -61,8 +61,6 @@ class is_identical{
                 return true;
             else if(p == null || q== null)
                 return false;
-            else if(p.data == q.data)
-                return true;
             else if(p.data != q.data)
                 return false;
             else

@@ -95,7 +95,24 @@ class Graph{
         }
         System.out.println("-----------------------");
     }
-    public static void main(String[] args){
+    public boolean hasPath(String vname1, String vname2, HashMap<String,Boolean> processed){
+        if(!vtces.containsKey(vname1) || !vtces.containsKey(vname2)){
+            return false;
+        }
+        if(containEdge(vname1,vname2)){
+            return true;
+        }
+        processed.put(vname1,true);
+        List<String> keys = new ArrayList<>(vtces.keySet());
+        for(String key : keys){
+            if(!processed.containsKey(key) && hasPath(key,vname2,processed)){
+                return true;
+            }
+        }
+        return false;
+
+    }
+    public static void main(String[] args) {
         Graph graph = new Graph();
         graph.addVertex("A");
         graph.addVertex("B");
@@ -103,21 +120,25 @@ class Graph{
         graph.addVertex("D");
         graph.addVertex("E");
         graph.addVertex("F");
+        graph.addVertex("G");
         graph.display();
-        graph.addEdge("A", "B",2);
-        graph.addEdge("A", "B",2);
-        graph.addEdge("A", "D",2);
-        graph.addEdge("B", "C",2);
-        graph.addEdge("C", "D",2);
-        graph.addEdge("D", "E",2);
-        graph.addEdge("E", "F",2);
+        graph.addEdge("A", "B", 2);
+        graph.addEdge("A", "D", 2);
+        graph.addEdge("B", "C", 2);
+        graph.addEdge("C", "D", 2);
+        graph.addEdge("D", "E", 2);
+        graph.addEdge("E", "F", 2);
+        graph.addEdge("E", "G", 2);
+        graph.addEdge("F", "G", 2);
         graph.display();
-        graph.removeVertex("A");
-        graph.removeVertex("G");
-        graph.display();
-        graph.addEdge("F","B",3);
-        graph.addEdge("F","E",3);
-        graph.display();
-        
+//        graph.removeVertex("A");
+//        graph.removeVertex("G");
+//        graph.display();
+//        graph.addEdge("F","B",3);
+//        graph.addEdge("F","E",3);
+//        graph.display();
+        System.out.println(graph.hasPath("A", "F", new HashMap<>()));
+
+
     }
 }

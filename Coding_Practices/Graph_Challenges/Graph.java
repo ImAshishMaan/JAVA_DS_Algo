@@ -1,7 +1,5 @@
 package Graph_Challenges.java;
-
 import java.util.*;
-
 class Graph{
     class Vertices{
         HashMap<String, Integer> nbrs = new HashMap<>();
@@ -112,19 +110,112 @@ class Graph{
         return false;
 
     }
+    private class Pair{
+        String vname;
+        String psf;
+    }
+    public boolean bfs(String src, String dst){
+        LinkedList<Pair> queue = new LinkedList<>();
+        HashMap<String,Boolean> processed = new HashMap<>();
+        Pair sp = new Pair();
+        sp.vname = src;
+        sp.psf = src;
+        queue.addLast(sp);
+        while (!queue.isEmpty()){
+            Pair rp = queue.removeFirst();
+            if(processed.containsKey(rp.vname)){
+                continue;
+            }
+            processed.put(rp.vname,true);
+            if(containEdge(rp.vname,dst)){
+                System.out.println(rp.psf+dst);
+                return true;
+            }
+            Vertices rpvtx = vtces.get(rp.vname);
+            ArrayList<String> nbrs = new ArrayList<>(rpvtx.nbrs.keySet());
+            for(String nbr : nbrs){
+                if(!processed.containsKey(nbr)){
+                    Pair np = new Pair();
+                    np.vname = nbr;
+                    np.psf = rp.psf + nbr;
+                    queue.addLast(np);
+                }
+            }
+        }
+        return false;
+    }
+    public boolean dfs(String src,String dst){
+        LinkedList<Pair> stack = new LinkedList<>();
+        HashMap<String , Boolean> processed = new HashMap<>();
+        Pair sp = new Pair();
+        sp.vname = src;
+        sp.psf = src;
+        stack.addFirst(sp);
+        while (!stack.isEmpty()){
+            Pair rp = stack.removeFirst();
+            if(processed.containsKey(rp.vname)){
+                continue;
+            }
+            processed.put(rp.vname, true);
+            if(containEdge(rp.vname,dst)){
+                System.out.println(rp.psf + dst);
+                return true;
+            }
+            Vertices rpvtx = vtces.get(rp.vname);
+            ArrayList<String> nbrs = new ArrayList<>(rpvtx.nbrs.keySet());
+            for(String nbr :nbrs){
+                if(!processed.containsKey(nbr)){
+                    Pair np = new Pair();
+                    np.vname = nbr;
+                    np.psf = rp.psf + nbr;
+                    stack.addFirst(np);
+                }
+            }
+        }
+        return false;
+    }
+    public void bft(){
+        HashMap<String ,Boolean> processed = new HashMap<>();
+        ArrayList<String> keys = new ArrayList<>(vtces.keySet());
+        LinkedList<Pair> queue = new LinkedList<>();
+        for(String key : keys){
+            if(processed.containsKey(key)){
+                continue;
+            }
+            Pair sp = new Pair();
+            sp.vname = key;
+            sp.psf = key;
+            queue.addFirst(sp);
+            while (!queue.isEmpty()){
+                Pair rp = queue.removeFirst();
+                processed.put(rp.vname,true);
+
+                Vertices rpvtx = vtces.get(rp.vname);
+                ArrayList<String> nbrs = new ArrayList<>(rpvtx.nbrs.keySet());
+                for(String nbr : nbrs){
+                    if(!processed.containsKey(nbr)){
+                        Pair np = new Pair();
+                        np.vname = nbr;
+                        np.psf = rp.psf + nbr;
+                        queue.addFirst(np);
+                    }
+                }
+            }
+        }
+    }
     public static void main(String[] args) {
         Graph graph = new Graph();
         graph.addVertex("A");
-        graph.addVertex("B");
+        graph.addVertex("H");
         graph.addVertex("C");
         graph.addVertex("D");
         graph.addVertex("E");
         graph.addVertex("F");
         graph.addVertex("G");
         graph.display();
-        graph.addEdge("A", "B", 2);
+        graph.addEdge("A", "H", 2);
         graph.addEdge("A", "D", 2);
-        graph.addEdge("B", "C", 2);
+        graph.addEdge("H", "C", 2);
         graph.addEdge("C", "D", 2);
         graph.addEdge("D", "E", 2);
         graph.addEdge("E", "F", 2);
@@ -137,8 +228,9 @@ class Graph{
 //        graph.addEdge("F","B",3);
 //        graph.addEdge("F","E",3);
 //        graph.display();
-        System.out.println(graph.hasPath("A", "F", new HashMap<>()));
-
+        //System.out.println(graph.hasPath("A", "F", new HashMap<>()));
+        System.out.println(graph.bfs("A", "G"));
+        System.out.println(graph.dfs("A", "G"));
 
     }
 }

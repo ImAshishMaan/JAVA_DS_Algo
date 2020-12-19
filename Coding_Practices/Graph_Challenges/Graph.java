@@ -185,7 +185,7 @@ class Graph{
             Pair sp = new Pair();
             sp.vname = key;
             sp.psf = key;
-            queue.addFirst(sp);
+            queue.addLast(sp);
             while (!queue.isEmpty()){
                 Pair rp = queue.removeFirst();
                 processed.put(rp.vname,true);
@@ -197,12 +197,42 @@ class Graph{
                         Pair np = new Pair();
                         np.vname = nbr;
                         np.psf = rp.psf + nbr;
-                        queue.addFirst(np);
+                        queue.addLast(np);
                     }
                 }
             }
         }
     }
+    public void dft(){
+        HashMap<String ,Boolean> processed = new HashMap<>();
+        ArrayList<String> keys = new ArrayList<>(vtces.keySet());
+        LinkedList<Pair> stack = new LinkedList<>();
+        for(String key : keys){
+            if(processed.containsKey(key)){
+                continue;
+            }
+            Pair sp = new Pair();
+            sp.vname = key;
+            sp.psf = key;
+            stack.addFirst(sp);
+            while (!stack.isEmpty()){
+                Pair rp = stack.removeFirst();
+                processed.put(rp.vname,true);
+
+                Vertices rpvtx = vtces.get(rp.vname);
+                ArrayList<String> nbrs = new ArrayList<>(rpvtx.nbrs.keySet());
+                for(String nbr : nbrs){
+                    if(!processed.containsKey(nbr)){
+                        Pair np = new Pair();
+                        np.vname = nbr;
+                        np.psf = rp.psf + nbr;
+                        stack.addFirst(np);
+                    }
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         Graph graph = new Graph();
         graph.addVertex("A");

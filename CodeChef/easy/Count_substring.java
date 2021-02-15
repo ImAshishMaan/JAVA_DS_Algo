@@ -7,11 +7,11 @@ class Count_substring{
         try{
         Scanner sc = new Scanner(System.in);
         int T = sc.nextInt();
-        for(int i=0 ;i<T ;i++) {
+        while(T > 0) {
             int n = sc.nextInt();
             String s = sc.next();
-            int count = 0;
-            for (int j = 0; j < s.length(); j++) {
+            long count = 0;
+            for (int j = 0; j < n; j++) {
                 if (s.charAt(j) == '1')
                     count++;
             }

@@ -14,11 +14,11 @@ class Ladder_problem{
         if(dp[n] != 0)
             return dp[n];
 
-        int step = 0;
+        int ways = 0;
         for(int i=1 ; i <= k ;i++){
             if(n >= i)
-                step = step + steps(n-i,k,dp);
+                ways = ways + steps(n-i,k,dp);
         }
-        return dp[n] = step;
+        return dp[n] = ways;
     }
 }
